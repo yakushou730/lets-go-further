@@ -9,7 +9,7 @@ import (
 	"github.com/yakushou730/lets-go-further/internal/data"
 )
 
-func (app *application) registeruserHandler(w http.ResponseWriter, r *http.Request) {
+func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Request) {
 	var input struct {
 		Name     string `json:"name"`
 		Email    string `json:"email"`
@@ -50,6 +50,12 @@ func (app *application) registeruserHandler(w http.ResponseWriter, r *http.Reque
 		default:
 			app.serverErrorResponse(w, r, err)
 		}
+		return
+	}
+
+	err = app.mailer.Send(user.Email, "user_welcome.tmpl", user)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
 		return
 	}
 
