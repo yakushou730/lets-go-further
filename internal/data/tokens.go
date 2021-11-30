@@ -2,10 +2,10 @@ package data
 
 import (
 	"context"
+	"crypto/rand"
 	"crypto/sha256"
 	"database/sql"
 	"encoding/base32"
-	"math/rand"
 	"time"
 
 	"github.com/yakushou730/lets-go-further/internal/validator"
